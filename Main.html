@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Wedding Countdown</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* 
+      1) The linear-gradient adds a translucent white overlay.
+      2) Replace "wedding_background.jpg" with your actual image filename/path.
+      3) background-size: contain ensures the entire image is visible (no cropping).
+         If you prefer to fill the screen, switch to background-size: cover.
+    */
+    body {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
+        url("Wedding Image.jpg") center center no-repeat;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Heading container */
+    #heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Top line: INVITATION/ISIMEMO in bold uppercase blue */
+    #heading h1 {
+      font-size: 5rem; /* Adjust as needed */
+      color: #1855d1;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    /* Second line: Names & ceremony in a cursive or serif font */
+    #heading h2 {
+      font-size: 3rem; /* Adjust as needed */
+      font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+      color: #333; /* You can switch this to white (#fff) if you prefer */
+      margin: 10px 0 0;
+      font-weight: normal;
+    }
+
+    /* Countdown container */
+    #countdown {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Heading Section -->
+  <div id="heading">
+    <h1>Traditional Ceremony/ Umgcagco</h1>
+    <h2>Sizwe Zwane and Sanele Dlamini Traditional Ceremony/Umgcagco</h2>
+  </div>
+
+  <!-- Countdown Section -->
+  <div id="countdown">Loading countdown...</div>
+
+  <script>
+    // Set your wedding date and time
+    const weddingDate = new Date("June 30, 2025 15:00:00").getTime();
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      // Calculate time remaining
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      // If the countdown is finished, display a different message
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "The wedding has started!";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
